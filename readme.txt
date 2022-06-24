@@ -1,0 +1,26 @@
+--- webp jpg processing timing ---
+Compares the necessary processing times of jpg and webp for different scenarious.
+
+
+Tests:
+1. Converting various file formats to jpg and webp
+	1.1 jpg
+	1.2 png
+	1.3 webp
+	1.4 tiff
+2. Image manipulation of jpg and webp files
+	2.1 resizing
+	2.2 rotating
+	2.3 force resizing
+	
+Results:
+Alle timing results are saved in the "results" folder as .txt-files.
+The content of those .txt-files can be copied directly into the provided excel file into the corresponding sheet.
+The graphical comparison is then done automatically.
+	
+Procedure:
+The folder "originals" contains random 40 .jpg images (source: https://unsplash.com/). In the first step these images get formatted into jpg,png,webp,tiff images. These are then saved into the folder "files_for_comparison". If they converted once, the variable "create_files" can be set to false. This saves time the the next runs.
+The number of files that should be compared can be set with the variable "number_of_files_compared". The maximum is 40.
+All results are the average of all images used. The more images are being used, the more stable the results will be, but the longher the runtime will be.
+All tests are being done for different image qualities. The image gets compressed at first and then all the tests are beeing done.
+Some of the new files get saved in the folder "Zwischenspeicher", but get deleted again immediately.
