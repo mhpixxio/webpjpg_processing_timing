@@ -22,8 +22,8 @@ func main() {
 	manipulation_test := true
 
 	//settings for the original files
-	original_file_endnung := ".jpg"
-	number_of_files_compared := 5
+	original_file_endung := ".jpg"
+	number_of_files_compared := 40
 	number_of_files_max := 40
 
 	//define file types
@@ -55,9 +55,9 @@ func main() {
 		for _, file_endung := range m {
 			for i := 0; i < number_of_files_max; i++ {
 				if file_endung == ".jpg" {
-					args = []string{"./originals/" + strconv.Itoa(i) + original_file_endnung + "[0]", "-background", "white", "-alpha", "remove", "./files_for_comparison/" + strconv.Itoa(i) + file_endung}
+					args = []string{"./originals/" + strconv.Itoa(i) + original_file_endung + "[0]", "-background", "white", "-alpha", "remove", "./files_for_comparison/" + strconv.Itoa(i) + file_endung}
 				} else {
-					args = []string{"./originals/" + strconv.Itoa(i) + original_file_endnung + "[0]", "./files_for_comparison/" + strconv.Itoa(i) + file_endung}
+					args = []string{"./originals/" + strconv.Itoa(i) + original_file_endung + "[0]", "./files_for_comparison/" + strconv.Itoa(i) + file_endung}
 				}
 				cmd := exec.Command("convert", args...)
 				_, err := cmd.Output()
