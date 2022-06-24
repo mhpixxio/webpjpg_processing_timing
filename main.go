@@ -160,7 +160,7 @@ func main() {
 		file.Close()
 	}
 
-	//do all image manipulations with the jpg and webp in different qualities
+	//do all image manipulations with jpg and webp in different qualities
 	if manipulation_test == true {
 		for key, file_endung := range m_2 {
 			for i := 0; i < number_of_files_compared; i++ {
