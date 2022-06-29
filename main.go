@@ -178,7 +178,9 @@ func main() {
 					if err != nil {
 						fmt.Println(err)
 					}
-					//resize to new width x height
+
+					//do all tests
+					//test 0 resize to new width x height
 					width := 1920
 					height := 1920
 					start := time.Now()
@@ -204,7 +206,7 @@ func main() {
 					}
 					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
 					number_of_tests++
-					//rotate
+					//test 1 rotate
 					start = time.Now()
 					buffer, err = bimg.Read("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
 					if err != nil {
@@ -224,7 +226,7 @@ func main() {
 					}
 					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
 					number_of_tests++
-					//force resize
+					//test 2 force resize
 					start = time.Now()
 					width = 1000
 					height = 500
@@ -253,6 +255,7 @@ func main() {
 					}
 					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
 					number_of_tests++
+
 					//delete file after image manipulation tests
 					err = os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
 					if err != nil {
