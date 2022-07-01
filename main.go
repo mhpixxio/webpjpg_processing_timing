@@ -32,6 +32,7 @@ func main() {
 	m[1] = ".png"
 	m[2] = ".webp"
 	m[3] = ".tiff"
+	m[4] = ".heic"
 	m_2 := make(map[int]string) //file types for manipulation tests
 	m_2[0] = ".jpg"
 	m_2[1] = ".webp"
@@ -169,20 +170,19 @@ func main() {
 					//create file in new quality
 					quali := (j + 1) * int(100/quality_steps)
 					if file_endung == ".jpg" {
-						args = []string{"-quality", strconv.Itoa(quali), "./files_for_comparison/" + strconv.Itoa(i) + file_endung + "[0]", "-background", "white", "-alpha", "remove", "./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung}
+						args = []string{"-quality", strconv.Itoa(quali), "./files_for_comparison/" + strconv.Itoa(i) + file_endung + "[0]", "-background", "white", "-alpha", "remove", "-resize", "1920x1920", "./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung}
 					} else {
-						args = []string{"-quality", strconv.Itoa(quali), "./files_for_comparison/" + strconv.Itoa(i) + file_endung + "[0]", "./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung}
+						args = []string{"-quality", strconv.Itoa(quali), "./files_for_comparison/" + strconv.Itoa(i) + file_endung + "[0]", "-resize", "1920x1920", "./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung}
 					}
 					cmd := exec.Command("convert", args...)
 					_, err := cmd.Output()
 					if err != nil {
 						fmt.Println(err)
 					}
-
 					//do all tests
 					//test 0 resize to new width x height
-					width := 1920
-					height := 1920
+					width := 500
+					height := 500
 					start := time.Now()
 					buffer, err := bimg.Read("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
 					if err != nil {
@@ -206,7 +206,59 @@ func main() {
 					}
 					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
 					number_of_tests++
-					//test 1 rotate
+					//test 1 resize to new width x height
+					width = 860
+					height = 860
+					start = time.Now()
+					buffer, err = bimg.Read("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
+					if err != nil {
+						fmt.Fprintln(os.Stderr, err)
+					}
+					newImage, err = bimg.NewImage(buffer).Resize(width, height)
+					if err != nil {
+						fmt.Fprintln(os.Stderr, err)
+					}
+					size, err = bimg.NewImage(newImage).Size()
+					if size.Width != width || size.Height != height {
+						fmt.Println("The image size is valid")
+					}
+					bimg.Write("./Zwischenspeicher/"+strconv.Itoa(i)+"_"+strconv.Itoa(quali)+"_temp"+file_endung, newImage)
+					elapsed = int(time.Since(start))
+					if key == 0 {
+						benchmark_time_manipulation_jpg = append(benchmark_time_manipulation_jpg, [4]int{i, j, number_of_tests, elapsed})
+					}
+					if key == 1 {
+						benchmark_time_manipulation_webp = append(benchmark_time_manipulation_webp, [4]int{i, j, number_of_tests, elapsed})
+					}
+					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
+					number_of_tests++
+					//test 2 resize to new width x height
+					width = 1200
+					height = 1200
+					start = time.Now()
+					buffer, err = bimg.Read("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
+					if err != nil {
+						fmt.Fprintln(os.Stderr, err)
+					}
+					newImage, err = bimg.NewImage(buffer).Resize(width, height)
+					if err != nil {
+						fmt.Fprintln(os.Stderr, err)
+					}
+					size, err = bimg.NewImage(newImage).Size()
+					if size.Width != width || size.Height != height {
+						fmt.Println("The image size is valid")
+					}
+					bimg.Write("./Zwischenspeicher/"+strconv.Itoa(i)+"_"+strconv.Itoa(quali)+"_temp"+file_endung, newImage)
+					elapsed = int(time.Since(start))
+					if key == 0 {
+						benchmark_time_manipulation_jpg = append(benchmark_time_manipulation_jpg, [4]int{i, j, number_of_tests, elapsed})
+					}
+					if key == 1 {
+						benchmark_time_manipulation_webp = append(benchmark_time_manipulation_webp, [4]int{i, j, number_of_tests, elapsed})
+					}
+					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
+					number_of_tests++
+					//test 3 rotate
 					start = time.Now()
 					buffer, err = bimg.Read("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + file_endung)
 					if err != nil {
@@ -226,7 +278,7 @@ func main() {
 					}
 					os.Remove("./Zwischenspeicher/" + strconv.Itoa(i) + "_" + strconv.Itoa(quali) + "_temp" + file_endung)
 					number_of_tests++
-					//test 2 force resize
+					//test 4 force resize
 					start = time.Now()
 					width = 1000
 					height = 500

@@ -3,16 +3,18 @@ Compares the necessary processing times of jpg and webp for different scenarious
 
 
 Tests:
-1. Converting various file formats to jpg and webp
+1. ImageMagick: Converting various file formats to jpg and webp
 	1.1 jpg
 	1.2 png
 	1.3 webp
 	1.4 tiff
 	(formats can be added or removed in variable "m" in line 30)
-2. Image manipulation of jpg and webp files
-	2.1 resizing
-	2.2 rotating
-	2.3 force resizing
+2. libvips: Image manipulation of jpg and webp files from HD (1920px) to...
+	2.1 resizing 500px
+	2.2 resizing 860px
+	2.3 resizing 1200px
+	2.4 rotating
+	2.5 force resizing
 	(Tests can be added or removed at line 181ff)
 	
 Results:
