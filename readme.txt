@@ -8,6 +8,7 @@ Tests:
 	1.2 png
 	1.3 webp
 	1.4 tiff
+	1.5 heic
 	(formats can be added or removed in variable "m" in line 30)
 2. libvips: Image manipulation of jpg and webp files from HD (1920px) to...
 	2.1 resizing 500px
