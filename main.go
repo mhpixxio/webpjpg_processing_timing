@@ -52,6 +52,7 @@ func main() {
 	benchmark_time_manipulation_webp_formatted := make([][3]int, 0)
 
 	//create all files necessary from the originals
+	os.Mkdir("./Zwischenspeicher/", os.ModePerm)
 	if create_files == true {
 		for _, file_endung := range m {
 			for i := 0; i < number_of_files_max; i++ {
