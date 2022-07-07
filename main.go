@@ -53,6 +53,7 @@ func main() {
 
 	//create all files necessary from the originals
 	os.Mkdir("./Zwischenspeicher/", os.ModePerm)
+	os.Mkdir("./files_for_comparison/", os.ModePerm)
 	if create_files == true {
 		for _, file_endung := range m {
 			for i := 0; i < number_of_files_max; i++ {
