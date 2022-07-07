@@ -24,7 +24,7 @@ func main() {
 	//settings for the original files
 	original_file_endung := ".jpg"
 	number_of_files_compared := 40
-	number_of_files_max := 40
+	number_of_files_max := 40 //used for the initial creation of all necessary files if "create_files := true" in line 18
 
 	//define file types
 	m := make(map[int]string) //file types for convertion tests
