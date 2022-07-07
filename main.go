@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/h2non/bimg"
+	"github.com/h2non/bimg" //version v1.1.6 required (as in go.mod), newer versions won't work (https://github.com/h2non/bimg/issues/401#issuecomment-1079927069)
 )
 
 func main() {
